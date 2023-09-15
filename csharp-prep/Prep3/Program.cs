@@ -4,6 +4,9 @@ using System;
 * @Author is Austin Campbell@
 * Feel like I'm grasping C# pretty good and am enjoying it. Looking forward to rewriting a few applications using
 * the .NET framework instead of using Python. So far I feel like C# is significantly more 'programmed' than Python.
+*
+* Checked the instructor code. @@THIS - guess = int.Parse(Console.ReadLine());
+* Definitely a simpler approach than mine ^^
 */
 
 class Program
