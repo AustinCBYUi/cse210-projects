@@ -107,6 +107,52 @@ Can also access the items by their index.
         {
             Console.WriteLine(words[i]);
         }
+
+
+
+---------- Functions -----------
+You call what is being returned right there with returnType. Always use TitleCase for functions.
+        returnType FunctionName(dataType parameter1, dataType parameter2)
+        {
+            // function_body
+        }
+
+doesn't return anything using 'void'
+        void DisplayMessage()
+        {
+            Console.WriteLine("Hello world!");
+        }
+
+Accepts a single string parameter
+        void DisplayPersonalMessage(string userName)
+        {
+            Console.WriteLine($"Hello {userName}.");
+        }
+
+This function adds two numbers together and returns a result as an int as shown
+        int AddNumbers(int first, int second)
+        {
+            int sum = first + second;
+            return sum;
+        }
+
+To define a standalone function that doesn't use any other context.
+        static void DisplayMessage()
+        {
+            Console.WriteLine("Hello World");
+        }
+
+        static void DisplayPersonalMessage(string userName)
+        {
+            Console.WriteLine($"Hello there {userName}!");
+        }
+
+Returns an int
+        static int AddNumbers(int first, int second)
+        {
+            int sum = first + second;
+            return sum;
+        }
         */
     }
 }

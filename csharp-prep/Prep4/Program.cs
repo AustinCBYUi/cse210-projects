@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 //This ^^ is a requirement for lists.
 
+/*
+* Really enjoyed this one, would be simpler to use functions looking back on this after learning functions!
+*/
+
 class Program
 {
     static void Main(string[] args)
