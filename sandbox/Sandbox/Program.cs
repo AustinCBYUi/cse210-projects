@@ -82,6 +82,31 @@ strings to numbers
 numbers to strings
         int number = 42;
         string textVersion = number.ToString();
+
+
+--------- Lists --------
+        List<int> numbers = new List<int>();
+        List<string> words = new List<string>();
+
+Adding to lists
+        numbers.Add(9);
+        numbers.Add(16);
+        words.Add("Hello");
+
+Use Count to get all items in a list
+        Console.WriteLine(words.Count);
+
+Easiest and safest way to iterate through a list is to use a foreach loop.
+        foreach (string word in strings)
+        {
+            Console.WriteLine(word);
+        }
+
+Can also access the items by their index.
+        for (int i = 0; i < words.Count; i++)
+        {
+            Console.WriteLine(words[i]);
+        }
         */
     }
 }
