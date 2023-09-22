@@ -1,11 +1,11 @@
 public class Journal
 {
-    public List<Entry> _entries;
+    public List<Entry> _entries = new List<Entry>();
 
 //TODO: All these methods
     public void AddEntry(Entry newEntry)
     {
-        _entries.Add(newEntry);
+        
     }
 
     public void DisplayAll()

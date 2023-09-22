@@ -39,11 +39,16 @@ class Program
             {
                 //WriteEntry
                 Console.WriteLine(promptForEntry);
-                Console.Write("> ");
+                Console.Write("@ ");
+                //Entry newEntry = new Entry(); Don't need to be here.
                 //new variable that is the user's entry for the Journal
                 string userJournalEntry = Console.ReadLine();
                 //Update the newEntry object's attribute _entryText to be what the user's input was.
                 newEntry._entryText = userJournalEntry;
+                newEntry._date = "09/22/2023";
+                newEntry._promptText = userJournalEntry;
+                //should add the attributes to the newJournal
+                newJournal._entries.Add(newEntry);
             }
             else if (userInput == 2)
             {
