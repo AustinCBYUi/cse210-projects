@@ -5,11 +5,14 @@ class Program
 {
     static void Main(string[] args)
     {
+        //Initializing
         PromptGenerator newPrompt = new PromptGenerator();
         string promptForEntry = newPrompt.GetRandomPrompt();
         
+        //Tester line, remove ASAP -------------------------------
         Console.WriteLine(promptForEntry);
 
+        //Initialization
         Journal newJournal = new Journal();
 
         Entry newEntry = new Entry();

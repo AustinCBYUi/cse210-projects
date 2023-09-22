@@ -13,7 +13,7 @@ public class Entry
         string fileName = Console.ReadLine();
 
         _date = "09/21/2023";
-
+//Maybe this doesn't belong here, try in Journal class.
         string newEntryFile = $"{fileName}.txt";
         using (StreamWriter outputFile = new StreamWriter(newEntryFile))
         {
