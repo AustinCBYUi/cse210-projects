@@ -46,13 +46,14 @@ class Program
                 //Update the newEntry object's attribute _entryText to be what the user's input was.
                 newEntry._entryText = userJournalEntry;
                 newEntry._date = "09/22/2023";
-                newEntry._promptText = userJournalEntry;
+                newEntry._promptText = promptForEntry;
                 //should add the attributes to the newJournal
                 newJournal._entries.Add(newEntry);
             }
             else if (userInput == 2)
             {
                 //Display all written entries
+                newEntry.Display();
             }
             else if (userInput == 3)
             {

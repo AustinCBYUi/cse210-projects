@@ -10,7 +10,7 @@ public class Journal
 
     public void DisplayAll()
     {
-
+        
     }
 
     public void SaveToFile(string file)
