@@ -40,18 +40,4 @@ using (StreamWriter outputFile = new StreamWriter(filename))
     // You can use the $ and include variables just like with Console.WriteLine
     string color = "Blue";
     outputFile.WriteLine($"My favorite color is {color}");
-
-    my stuff ---------------------------------
-    Console.WriteLine("Filename: ");
-        string fileName = Console.ReadLine();
-
-        _date = "09/21/2023";
-//Maybe this doesn't belong here, try in Journal class.
-        string newEntryFile = $"{fileName}.txt";
-        using (StreamWriter outputFile = new StreamWriter(newEntryFile))
-        {
-            outputFile.WriteLine($"Date: {_date}\n");
-            outputFile.WriteLine($"Prompt: {_promptText}");
-            outputFile.WriteLine($"Entry: {_entryText}");
-            // newJournal.AddEntry(newEntryFile);
     */
