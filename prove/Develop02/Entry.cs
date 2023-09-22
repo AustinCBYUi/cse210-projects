@@ -1,3 +1,6 @@
+using System.Net.Mail;
+using System.IO;
+
 public class Entry
 {
     public string _date;
@@ -9,7 +12,16 @@ public class Entry
         Console.WriteLine("Filename: ");
         string fileName = Console.ReadLine();
 
+        _date = "09/21/2023";
+
         string newEntryFile = $"{fileName}.txt";
+        using (StreamWriter outputFile = new StreamWriter(newEntryFile))
+        {
+            outputFile.WriteLine($"Date: {_date}\n");
+            outputFile.WriteLine($"Prompt: {_promptText}");
+            outputFile.WriteLine($"Entry: {_entryText}");
+            // newJournal.AddEntry(newEntryFile);
+        }
     }
 }
 
