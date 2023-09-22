@@ -1,5 +1,6 @@
 using System.Net.Mail;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 public class Entry
 {

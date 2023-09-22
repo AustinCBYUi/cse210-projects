@@ -15,7 +15,7 @@ class Program
         //Initialization
         Journal newJournal = new Journal();
 
-        Entry newEntry = new Entry();
+        // Entry newEntry = new Entry();
         
         //Boolean for while loop.
         bool userExitProgram = false;
@@ -40,7 +40,7 @@ class Program
                 //WriteEntry
                 Console.WriteLine(promptForEntry);
                 Console.Write("@ ");
-                //Entry newEntry = new Entry(); Don't need to be here.
+                Entry newEntry = new Entry(); //Does probably need to be here.
                 //new variable that is the user's entry for the Journal
                 string userJournalEntry = Console.ReadLine();
                 //Update the newEntry object's attribute _entryText to be what the user's input was.
@@ -53,7 +53,8 @@ class Program
             else if (userInput == 2)
             {
                 //Display all written entries
-                newEntry.Display();
+                // newEntry.Display();
+                newJournal.DisplayAll();
             }
             else if (userInput == 3)
             {
