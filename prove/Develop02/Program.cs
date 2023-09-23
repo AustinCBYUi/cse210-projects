@@ -34,7 +34,7 @@ class Program
             //userInput from menu selection
             int userInput = int.Parse(Console.ReadLine());
 
-
+            //Write Entry
             if (userInput == 1)
             {
                 //WriteEntry
@@ -50,20 +50,32 @@ class Program
                 //should add the attributes to the newJournal
                 newJournal._entries.Add(newEntry);
             }
+            //Display all Entries
             else if (userInput == 2)
             {
                 //Display all written entries
                 // newEntry.Display();
                 newJournal.DisplayAll();
             }
+            //Save to File
             else if (userInput == 3)
             {
+                //Why do I have to initialize a new object when one already exists?
+                Entry newEntry = new Entry();
+
                 //Save to file
+                Console.Write("Type a Filename: ");
+                string newUserDefinedFile = Console.ReadLine();
+                newUserDefinedFile = $"{newUserDefinedFile}.txt";
+
+                newJournal.SaveToFile(newUserDefinedFile, newEntry);
             }
+            //Load from File.
             else if (userInput == 4)
             {
                 //Load file
             }
+            //Just quit the program
             else
             {
                 //Exit the program.

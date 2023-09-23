@@ -16,10 +16,6 @@ public class Journal
     public List<Entry> _entries = new List<Entry>();
 
 //TODO: All these methods
-    public void AddEntry(Entry newEntry)
-    {
-        
-    }
 
 /// <summary>
 /// DisplayAll() : void - method to display all content in the _entries list. Built in counter to count
@@ -48,11 +44,16 @@ public class Journal
         }
     }
 
-    public void SaveToFile(string file)
+    public void SaveToFile(string file, Entry entry)
     {
         //Should save to a .txt file with a name that is specified
         //by the user.
-
+        using (StreamWriter outputFile = new StreamWriter(file))
+        {
+            outputFile.WriteLine($"Date: {entry._date}\n");
+            outputFile.WriteLine($"Prompt: {entry._promptText}");
+            outputFile.WriteLine($"User Entry: {entry._entryText}");
+        }
         /* //This is what I wrote earlier, will work on this method in full next.
         Console.WriteLine("Filename: ");
         string fileName = Console.ReadLine();
