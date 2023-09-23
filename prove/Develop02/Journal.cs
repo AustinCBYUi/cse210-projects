@@ -1,21 +1,24 @@
 using System.Runtime.CompilerServices;
+using System.IO;
+
+
 /// <summary>
 /// Abstract class of a physical journal. 
 /// </summary>
 /// <remarks>
 /// Attributes: _entries
 /// _entries is a list that is defined from the Entry class.
-/// Methods: AddEntry(string) : void
+/// Methods:
 /// DisplayAll() : void
-/// saveToFile(string file name) : void
-/// loadFromFile(string file name) : void
+/// saveToFile(string fileName) : void
+/// loadFromFile(string fileName) : void
 /// </remarks>
 
 public class Journal
 {
     public List<Entry> _entries = new List<Entry>();
 
-//TODO: All these methods
+
 
 /// <summary>
 /// DisplayAll() : void - method to display all content in the _entries list. Built in counter to count
@@ -44,35 +47,50 @@ public class Journal
         }
     }
 
-    public void SaveToFile(string file, Entry entry)
+
+/// <summary>
+/// Creates a file to the root folder with the user's input as a filename.
+/// File automatically created as .txt extension. No return, takes a string file name
+/// as a parameter. File is also formatted accordingly: ----Sep----, Entry#, Date, Prompt, Entry
+/// </summary>
+/// <param name="file">String as a parameter which is the file.txt</param>
+    public void SaveToFile(string file)
     {
         //Should save to a .txt file with a name that is specified
         //by the user.
         using (StreamWriter outputFile = new StreamWriter(file))
         {
-            outputFile.WriteLine($"Date: {entry._date}\n");
-            outputFile.WriteLine($"Prompt: {entry._promptText}");
-            outputFile.WriteLine($"User Entry: {entry._entryText}");
+            int count = 0;
+            foreach (Entry entry in _entries)
+            {
+                count += 1;
+                //Separator
+                outputFile.WriteLine("-----------------------------");
+                //Entry number
+                outputFile.WriteLine($"Entry #{count}");
+                //Entry information
+                outputFile.WriteLine($"Date: {entry._date}");
+                outputFile.WriteLine($"Prompt: {entry._promptText}");
+                outputFile.WriteLine($"User Entry: {entry._entryText}\n");
+            }
         }
-        /* //This is what I wrote earlier, will work on this method in full next.
-        Console.WriteLine("Filename: ");
-        string fileName = Console.ReadLine();
-
-        _date = "09/21/2023";
-        //Maybe this doesn't belong here, try in Journal class.
-        string newEntryFile = $"{fileName}.txt";
-        using (StreamWriter outputFile = new StreamWriter(newEntryFile))
-        {
-            outputFile.WriteLine($"Date: {_date}\n");
-            outputFile.WriteLine($"Prompt: {_promptText}");
-            outputFile.WriteLine($"Entry: {_entryText}");
-            // newJournal.AddEntry(newEntryFile);
-        */
-    
+        Console.WriteLine($"\nSuccessfully wrote {file}.\n");
     }
 
+
+/// <summary>
+/// Loads from a file that is in the root directory. Changes no formatting of the pre-existing file.
+/// </summary>
+/// <param name="file">String as a parameter which is the file.txt</param>
     public void LoadFromFile(string file)
     {
-        
+        //Already using System.IO otherwise it would be..
+        //System.IO.File.ReadAllLines(filenameHere);
+
+        //This works just reading the file? I already formatted it when it was written
+        // so perhaps that is why? No need to use a loop, this works great.
+        string lines = File.ReadAllText(file);
+
+        Console.WriteLine(lines);
     }
 }
