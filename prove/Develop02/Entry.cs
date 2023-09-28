@@ -1,5 +1,6 @@
 using System.Net.Mail;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 public class Entry
 {
@@ -9,19 +10,10 @@ public class Entry
 
     public void Display()
     {
-        Console.WriteLine("Filename: ");
-        string fileName = Console.ReadLine();
-
-        _date = "09/21/2023";
-//Maybe this doesn't belong here, try in Journal class.
-        string newEntryFile = $"{fileName}.txt";
-        using (StreamWriter outputFile = new StreamWriter(newEntryFile))
-        {
-            outputFile.WriteLine($"Date: {_date}\n");
-            outputFile.WriteLine($"Prompt: {_promptText}");
-            outputFile.WriteLine($"Entry: {_entryText}");
-            // newJournal.AddEntry(newEntryFile);
-        }
+        Console.WriteLine("Journal Entry.");
+        Console.WriteLine($"Date: {_date}.");
+        Console.WriteLine($"Prompt: {_promptText}.");
+        Console.WriteLine($"Your Response:\n{_entryText}\n");
     }
 }
 
