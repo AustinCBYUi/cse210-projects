@@ -1,13 +1,23 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
+        Reference newScriptureToStudy = new Reference();
+        //Change the data below only! This should be temporary \\
+        string myBook = "John";
+        string myScripture = $"For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should\nnot perish, but have everlasting life.";
+        int myChapter = 3;
+        int myVerse = 16;
+        int myEndVerse = 0;
+        // Change the data above ONLY \\
+        Word newText = new Word(myScripture);
+        newScriptureToStudy.SetReferenceData(myBook, myChapter, myVerse, myEndVerse);
+        Console.WriteLine(newScriptureToStudy.GetDisplayText() + " " + newText.GetDisplayText());
 
-        Scripture newScripture = new Scripture();
+        Console.WriteLine("\nPress Enter to remove words from scripture or type 'quit' to exit.\n");
 
-        Console.WriteLine(newScripture.WriteScripturesToConsole());
     }
 }
