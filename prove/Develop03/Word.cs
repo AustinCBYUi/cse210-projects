@@ -1,6 +1,6 @@
 public class Word
-{
-    private string _text;
+{ //{Word} | Attributes : bool / _isHidden t/f \\ _text : string stores each actual word as a string.
+    public string _text;
     private bool _isHidden;
 
 
@@ -31,13 +31,5 @@ public class Word
     public Word(string newText)
     {
         _text = newText;
-    }
-
-    public Word(Word newWord)
-    {
-        foreach (Word word in newWord)
-        {
-            
-        }
     }
 }

@@ -13,15 +13,6 @@ public class Scripture
     }
 
 
-    private void AddToWords()
-    {
-        foreach (Word word in _words)
-        {
-            
-        }
-    }
-
-
     public string GetDisplayText()
     //This should basically display the "John 3:16 For God so loved the world..."
     {
