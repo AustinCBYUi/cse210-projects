@@ -1,38 +1,26 @@
-using System.Runtime.InteropServices;
-
 public class Word
 { //{Word} | Attributes : bool / _isHidden t/f \\ _text : string stores each actual word as a string.
     private string _text;
     private bool _isHidden;
 
-
+/// <summary>
+/// Hide the individual letters in the Word object and replace them with underscores.
+/// </summary>
     public void Hide()
     {
         foreach (char letter in _text)
         {
-            var DONOTREPLACE_PERIOD = '.';
-            var DONOTREPLACE_COMMA = ',';
-            //VAR IS IN C#??
-            if (_isHidden != true)
+            if (letter == '.')
             {
-                if (letter != DONOTREPLACE_PERIOD || letter != DONOTREPLACE_COMMA)
-                {
-                    var replace = _text.Replace(letter, '_');
-                    _text = replace;
-                }
-                else
-                {
-                    var replace = _text.Replace(letter, '_');
-                }
+                var doNotReplace = _text.Replace(letter, '.');
             }
+            else if (letter == ',')
+            {
+                var doNotReplace = _text.Replace(letter, ',');
+            }
+            var replace = _text.Replace(letter, '_');
         }
         _isHidden = true;
-    }
-
-
-    public string Show()
-    {
-        return _text;
     }
 
 

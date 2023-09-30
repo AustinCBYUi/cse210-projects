@@ -1,3 +1,4 @@
+using System.Data.SqlTypes;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Microsoft.Win32.SafeHandles;
@@ -5,11 +6,28 @@ using Microsoft.Win32.SafeHandles;
 public class Scripture
 {
     private List<Word> _words = new List<Word>();
-    private Reference _reference;
 
-    public void HideRandomWords(int numberToHide)
+    public void HideRandomWords(int newNumber, int maxLengthOfList) //newNumber is the random number from GenerateRandomNumber()
     {
-        _words[numberToHide].Hide();
+        if (_words[newNumber].IsHidden() == true)
+        {
+            int anotherNewNumber = GenerateRandomNumber(maxLengthOfList);
+            //Calls the method again internally to check if it's hidden again.
+            HideRandomWords(anotherNewNumber, maxLengthOfList);
+        }
+        else if (_words[newNumber].IsHidden() == false)
+        {
+            _words[newNumber].Hide();
+        }
+    }
+
+
+    public int GenerateRandomNumber(int maxLengthOfList)
+    {
+        Random newRandom = new Random();
+        int newNumber = newRandom.Next(maxLengthOfList);
+
+        return newNumber;
     }
 
 
@@ -21,16 +39,37 @@ public class Scripture
         foreach (Word word in _words)
         {
             countThisagain += 1;
-            newWordText += word.Show() + " "; //I'm using the .Show() method to display the private _text;
+            newWordText += word.GetDisplayText() + " "; //I'm using the method to display the private _text;
         }
         return newWordText;
         throw new InvalidOperationException("No new Words found");
     }
 
 
-    public bool isCompletelyHidden()
+    public bool IsCompletelyHidden(int maxLengthOfList)
     {
-        return true;
+        int checker = 0;
+        bool checkThisBool = false;
+        foreach (Word word in _words)
+        {
+            if (word.IsHidden() == true)
+            {
+                //Add to the checker count.
+                checker += 1;
+            }
+            else
+            {
+                checker += 0;
+            }
+        }
+        if (checker == maxLengthOfList)
+        {
+            checkThisBool = true;
+        }
+        //If checker equals the length of the list (or if everything is IsHidden() = true)
+        // then return the IsCompletelyHidden bool as true.
+        
+        return checkThisBool;
     }
 
 
