@@ -4,21 +4,22 @@ public class Word
     private bool _isHidden;
 
 /// <summary>
-/// Hide the individual letters in the Word object and replace them with underscores.
+/// Hide the individual letters in the Word object and replace them with
 /// </summary>
     public void Hide()
     {
         foreach (char letter in _text)
         {
-            if (letter == '.')
+            //VAR IS IN C#??
+            if (_isHidden != true)
             {
-                var doNotReplace = _text.Replace(letter, '.');
+                Console.WriteLine(letter);
+                if (letter != '.' || letter != ',')
+                {
+                    var replace = _text.Replace(letter, '_');
+                    _text = replace;
+                }
             }
-            else if (letter == ',')
-            {
-                var doNotReplace = _text.Replace(letter, ',');
-            }
-            var replace = _text.Replace(letter, '_');
         }
         _isHidden = true;
     }
