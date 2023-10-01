@@ -8,18 +8,31 @@ public class Word
 /// </summary>
     public void Hide()
     {
+        char period = '.';
+        char comma = ',';
         foreach (char letter in _text)
         {
+            string newString = "";
             //VAR IS IN C#??
             if (_isHidden != true)
             {
-                Console.WriteLine(letter);
-                if (letter != '.' || letter != ',')
+                if (letter != period && letter != comma)
                 {
                     var replace = _text.Replace(letter, '_');
-                    _text = replace;
+                    newString += replace;
+                }
+                else if (letter == comma)
+                {
+                    var replace = _text.Replace(letter, comma);
+                    newString += replace;
+                }
+                else if (letter == period)
+                {
+                    var replace = _text.Replace(letter, period);
+                    newString += replace;
                 }
             }
+            _text = newString;
         }
         _isHidden = true;
     }
