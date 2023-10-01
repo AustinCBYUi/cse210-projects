@@ -6,54 +6,64 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Scripture testme = new Scripture();
-        Reference newScriptureToStudy = new Reference();
-        Scripture getScripture = new Scripture();
+        //New reader.
+        Reader readFromFile = new Reader();
+        //newScripture is the INSTANCE from the readFromFile class, so this isn't a constructor.
+        Scripture newScripture = readFromFile.GetScripture();
+        //Same with this one, not a constructor. It just gets the instance from the reader class
+        //that was already created there.
+        Reference newReference = readFromFile.GetReference();
 
-        //Change the data below only! This should be temporary \\
-        string myBook = "John";
-        string myScripture = "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should\nnot perish, but have everlasting life.";
-        int myChapter = 3;
-        int myVerse = 16;
-        int myEndVerse = 0;
-        // Change the data above ONLY \\
+        //Text file we will read from.
+        string readFromScripturesFile = "scriptures.txt";
+        //Call method in the class with the file as the parameter.
+        readFromFile.GetDataFromTxt(readFromScripturesFile);
+        //maxLength comes from the reader file as well now.
+        int maxLength = readFromFile.GetMaxLength();
 
-        newScriptureToStudy.SetReferenceData(myBook, myChapter, myVerse, myEndVerse);
+        //Just for the loop when you type 'quit', default is notquit.
         string userInput = "notquit";
 
-        int maxLength = 0;
-        //For each word in the string, add each word to the Word class as a new word.
-        foreach (string word in myScripture.Split(" "))
-        {
-            Word eachNewWord = new Word(word);
-            //Should add each new Word object to the <Word> list.
-            getScripture.AddToScriptureList(eachNewWord);
-            //Count each iteration to provide the new length of the list.
-            maxLength += 1;
-        }
+        //Main portion, while loop for program-user functionality.
         while (userInput != "quit")
         {
-            Console.WriteLine($"{newScriptureToStudy.GetDisplayText()} {getScripture.GetDisplayText()}");
+            //Write prompt with reference data first, then the scripture text.
+            Console.WriteLine($"{newReference.GetDisplayText()} {newScripture.GetDisplayText()}");
             Console.Write("Press enter to remove words, 'quit' to quit.\n");
             string getUserInput = Console.ReadLine().ToLower();
-            bool isTheListDone = getScripture.IsCompletelyHidden(maxLength);
+            //Should be false until list is completely hidden.
+            bool isTheListDone = newScripture.IsCompletelyHidden(maxLength);
             
+            //Conditionals for program logic.
             if (getUserInput == "quit")
             {
                 userInput = "quit";
+                Exit();
             }
+            //If the list is completely hidden, it will close the program.
             else if (isTheListDone == true)
             {
                 userInput = "quit";
-                System.Environment.Exit(0);
+                Exit();
             }
+            //If program is not completely hidden
             else if (isTheListDone != true)
             {
+                //Clear the console so user can't cheat.
                 Console.Clear();
                 //Always starting with numbers 1, and 4.
-                getScripture.HideRandomWords(1, maxLength);
-                getScripture.HideRandomWords(4, maxLength);
+                newScripture.HideRandomWords(1, maxLength);
+                newScripture.HideRandomWords(4, maxLength);
             }
         }
+    }
+
+    
+    /// <summary>
+    /// Exits the program with no exit code.
+    /// </summary>
+    private static void Exit()
+    {
+        System.Environment.Exit(0);
     }
 }

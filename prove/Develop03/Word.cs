@@ -1,10 +1,14 @@
+using System.Text;
+/// <summary>
+/// Represents a word as a string.
+/// </summary>
 public class Word
 { //{Word} | Attributes : bool / _isHidden t/f \\ _text : string stores each actual word as a string.
     private string _text;
     private bool _isHidden;
 
 /// <summary>
-/// Hide the individual letters in the Word object and replace them with
+/// Hide the individual letters in the Word object and replace them with underscores.
 /// </summary>
     public void Hide()
     {
@@ -12,32 +16,36 @@ public class Word
         char comma = ',';
         foreach (char letter in _text)
         {
-            string newString = "";
+            StringBuilder newString = new StringBuilder();
             //VAR IS IN C#??
             if (_isHidden != true)
             {
                 if (letter != period && letter != comma)
                 {
                     var replace = _text.Replace(letter, '_');
-                    newString += replace;
+                    newString.Append(replace);
                 }
                 else if (letter == comma)
                 {
                     var replace = _text.Replace(letter, comma);
-                    newString += replace;
+                    newString.Append(replace);
                 }
                 else if (letter == period)
                 {
                     var replace = _text.Replace(letter, period);
-                    newString += replace;
+                    newString.Append(replace);
                 }
             }
-            _text = newString;
+            _text = newString.ToString();
         }
         _isHidden = true;
     }
 
 
+/// <summary>
+/// Checks if the Word object has been set to hidden or not as a boolean.
+/// </summary>
+/// <returns>True/False</returns>
     public bool IsHidden()
     {
         if (_isHidden == true)
@@ -51,12 +59,20 @@ public class Word
     }
 
 
+/// <summary>
+/// Practicing encapsulation, this method returns the private string of the Word.
+/// </summary>
+/// <returns>String</returns>
     public string GetDisplayText()
     {
         return _text;
     }
 
 
+/// <summary>
+/// Constructor to create a new Word with the parameter as the text.
+/// </summary>
+/// <param name="newText">New text for the newly constructed object.</param>
     public Word(string newText)
     {
         _text = newText;
