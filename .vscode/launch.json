@@ -4,6 +4,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ForTGrizz",
+            "request": "launch",
+            "mainClass": "ForTGrizz",
+            "projectName": "cse210-projects_d67dfe8f"
+        },
+        {
+            "type": "java",
             "name": "Testing",
             "request": "launch",
             "mainClass": "Testing",

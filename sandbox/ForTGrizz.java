@@ -8,6 +8,7 @@ public class ForTGrizz {
                 System.out.println("Hello! Type a shape type!");
                 // System.in.toString()
                 String userInput = newScanner.nextLine();
+                newScanner.close();
 
                 int switchAccessor = 0;
                 if (userInput == "circle") {
