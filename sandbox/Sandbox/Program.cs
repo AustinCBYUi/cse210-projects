@@ -3,9 +3,86 @@ using System.Security.Cryptography.X509Certificates;
 
 class Program
 {
+        //Helping example for T-grizz
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Sandbox World!");
+        //Constant named pi, never changing value.
+        double PI = 3.14159;
+
+        //Introduction to the 'calculator'
+        Console.WriteLine("Type a shape to calculate the area of it!");
+        //Reads the line, and also converts all characters to lowercase to simplify things.
+        string userInput = Console.ReadLine().ToLower();
+
+        //Need to convert the switch to integers apparently.
+        //I set the switchAssigner to -1
+        int switchAssigner = 0;
+
+        //You could probably do this another way, but I am just helping.
+        //Then if you type a square, it gets set to 1
+        if (userInput == "circle")
+        {
+                switchAssigner = 1;
+        }
+        //If you type a circle it equals 2.
+        else if (userInput == "square")
+        {
+                switchAssigner = 2;
+        }
+        //lastly, if you type a rectangle it is 3!
+        else if (userInput == "rectangle")
+        {
+                switchAssigner = 3;
+        }
+        //Just a way to catch other shit you may type.
+        else
+        {
+                Console.WriteLine("You messed up to get here..");
+        }
+
+
+        //Switch with switchAssigner as my switch.
+        switch(switchAssigner)
+        {
+                //Circle case
+                case 1:
+                        Console.WriteLine("Radius of Circle: ");
+
+                        double radius = double.Parse(Console.ReadLine());
+                        //Order of operations first goomba,
+                        //Exponents comes before multiplication.
+                        double squareRadius = Math.Pow(radius, 2);
+                        double answerCircle = PI * squareRadius;
+
+                        Console.WriteLine($"Area of your circle: {answerCircle}.");
+                break;
+                //Square
+                case 2:
+                        Console.WriteLine("Length of a side: ");
+                        double squareSide = double.Parse(Console.ReadLine());
+
+                        double answerSquare = Math.Pow(squareSide, 2);
+
+                        Console.WriteLine($"Area of your square: {answerSquare}");
+                break;
+                //Rectangle
+                case 3:
+                        Console.WriteLine("Width: ");
+                        double rectangleWidth = double.Parse(Console.ReadLine());
+                        Console.WriteLine("Length: ");
+                        double rectangleLength = double.Parse(Console.ReadLine());
+
+                        double answerRectangle = rectangleWidth * rectangleLength;
+
+                        Console.WriteLine($"Area of your rectangle: {answerRectangle}");
+                break;
+        }
+    }
+}
+
+
+//---------------- BELOW HERE IS NOTES --------------\\
+
 //Practice
         // if (x > y)
         // {
@@ -154,5 +231,3 @@ Returns an int
             return sum;
         }
         */
-    }
-}
