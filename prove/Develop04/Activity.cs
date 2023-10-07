@@ -1,21 +1,26 @@
 public class Activity
 {
-    private string _name;
-    private string _description;
-    private int _duration;
+    protected string _name;
+    protected string _description;
+    protected int _duration;
 
-    public Activity(string name, string desc, int duration)
+    public Activity(int userDuration)
     {
-        _name = name;
-        _description = desc;
-        _duration = duration;
+        _duration = userDuration;
     }
 
 
     public void DisplayStartingMessage()
     {
-        string welcomeMsg = "Welcome to the Mindfulness Program!";
-        Console.WriteLine(welcomeMsg);
+        Console.WriteLine($"Welcome to the {_name} activity!");
+        Console.WriteLine($"{_description}");
+
+    }
+
+
+    public void CreateCountdown(int seconds)
+    {
+
     }
 
 

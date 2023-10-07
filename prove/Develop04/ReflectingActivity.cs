@@ -3,9 +3,11 @@ public class ReflectingActivity : Activity
     private List<string> _prompts = new List<string>();
     private List<string> _questions = new List<string>();
 
-    public ReflectingActivity()
+    public ReflectingActivity(int userDuration) : base(userDuration)
     {
-        //TODO
+        _name = "Reflecting Activity";
+        _description = "This activity will help you reflect on times..";
+        _duration = userDuration;
     }
 
 

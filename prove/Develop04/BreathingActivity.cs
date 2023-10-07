@@ -1,13 +1,25 @@
 public class BreathingActivity : Activity
 {
-    public BreathingActivity()
+    private bool _activityDone = false;
+//Help the user pace their breathing to have a session of deep breathing for a certain amount of time. They might find
+//more peace and less stress through the exercise.
+    public BreathingActivity(int userDuration) : base(userDuration)
     {
-        //TODO Constructor
+        _name = "Breathing Activity";
+        _description = "Practice controlled breathing for mindfulness.";
+        _duration = userDuration;
     }
+
 
 
     public void Run()
     {
-        //TODO
+        while (_activityDone == false)
+        {
+            Console.WriteLine("Get ready...");
+            //display animations here for 3 seconds?
+
+            
+        }
     }
 }
