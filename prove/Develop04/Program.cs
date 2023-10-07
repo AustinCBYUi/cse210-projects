@@ -1,13 +1,12 @@
 using System;
+using System.Runtime.InteropServices;
 
 class Program
 {
     static void Main(string[] args)
     {
-        //Constructors
-        string bName = "Breathing Activity";
-        string bDesc = "Practice controlled breathing for mindfulness";
-        int userDuration = 0 * 1000;
+        Activity super = new Activity(0);
+        int userDuration = 0;
         //BreathingActivity bActivity = new BreathingActivity(bName, bDesc, duration);
 
 
@@ -15,28 +14,38 @@ class Program
 
         while (userQuit == false)
         {
-
+            super.Clear();
             Console.WriteLine(@"""
-            Welcome to the Mindfulness Program!
-            Please type the number for the activity you choose!
+Welcome to the Mindfulness Program!
+Please type the number for the activity you choose!
 
-            1) Breathing Activity
-            2) Reflecting Activity
-            3) Listing Activity\n""");
+1) Breathing Activity
+2) Reflecting Activity
+3) Listing Activity
+4) Exit Application"""
+);
             //Carrot
-            Console.Write(">>>");
+            Console.Write(">>> ");
             //Int conversion from console.
             int typed = int.Parse(Console.ReadLine());
 
             switch (typed)
             {
                 case 1:
-                    Console.Write("How long in seconds would you like for your session?: ");
-                    userDuration = int.Parse(Console.ReadLine());
+                    super.Clear();
+                    BreathingActivity startActivity = new BreathingActivity();
+                    startActivity.Run();
                     break;
                 case 2:
+                    super.Clear();
+                    ReflectingActivity startRefActivity = new ReflectingActivity();
+                    startRefActivity.Run();
                     break;
                 case 3:
+                    break;
+                case 4:
+                    System.Console.Beep();
+                    Environment.Exit(0);
                     break;
             }
         }

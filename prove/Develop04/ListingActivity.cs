@@ -14,9 +14,13 @@ public class ListingActivity : Activity
     }
 
 
+    public ListingActivity() {}
+
+
     public void Run()
     {
-        //TODO
+        DisplayStartingMessage();
+
     }
 
 
