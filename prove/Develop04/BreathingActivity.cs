@@ -22,6 +22,8 @@ public class BreathingActivity : Activity
     public void Run()
     {
         DisplayStartingMessage(); //Gets _duration too I hope?
+        //I love that I can call a method with a variable and not have to call the method
+        //separately to display the Console stuff. Makes things easier and it's one line for what would take at least 2!
         int getTime = BreathingTimes();
         Console.WriteLine("Get ready...");
         ShowSpinner(5);
