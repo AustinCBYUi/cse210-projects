@@ -1,9 +1,13 @@
 using System.Runtime.InteropServices;
-
+/// <summary>
+/// References the Breathing Activity that inherits the Activity class as a base. Utilizes all
+/// parent methods and attributes.
+/// </summary>
 public class BreathingActivity : Activity
 {
-//Help the user pace their breathing to have a session of deep breathing for a certain amount of time. They might find
-//more peace and less stress through the exercise.
+    /// <summary>
+    /// Constructor to set up the activity's name and description.
+    /// </summary>
     public BreathingActivity()
     {
         _name = "Breathing Activity";
@@ -11,20 +15,22 @@ public class BreathingActivity : Activity
     }
 
 
-
+    /// <summary>
+    /// Runs the activity, uses DateTime.
+    /// </summary>
     public void Run()
     {
         DisplayStartingMessage(); //Gets _duration too I hope?
         Console.WriteLine("Get ready...");
-        ShowSpinner(5); //set to 5 instead.
+        ShowSpinner(5);
+
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
         
-        //while countdown is running
+        //while countdown is running.
         while (DateTime.Now < endTime)
         {
             //Start the countdown from the user input duration.
-            //Show message with a countdown with "Inhale" in the format string
             Console.WriteLine("-------- Inhale --------");
             ShowCountDown();
             //Exhale

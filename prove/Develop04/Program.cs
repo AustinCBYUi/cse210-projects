@@ -5,9 +5,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Activity super = new Activity(0);
-        int userDuration = 0;
-        //BreathingActivity bActivity = new BreathingActivity(bName, bDesc, duration);
+        //Just for calling the Close() method essentially.
+        Activity super = new Activity();
 
 
         bool userQuit = false;
@@ -42,6 +41,9 @@ Please type the number for the activity you choose!
                     startRefActivity.Run();
                     break;
                 case 3:
+                    super.Clear();
+                    ListingActivity startLisActivity = new ListingActivity();
+                    startLisActivity.Run();
                     break;
                 case 4:
                     System.Console.Beep();
