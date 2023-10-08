@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 /// </summary>
 public class BreathingActivity : Activity
 {
+    private int _breathingDuration;
     /// <summary>
     /// Constructor to set up the activity's name and description.
     /// </summary>
@@ -21,22 +22,56 @@ public class BreathingActivity : Activity
     public void Run()
     {
         DisplayStartingMessage(); //Gets _duration too I hope?
+        int getTime = BreathingTimes();
         Console.WriteLine("Get ready...");
         ShowSpinner(5);
 
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
+
+        //clear clutter
+        Clear();
         
         //while countdown is running.
         while (DateTime.Now < endTime)
         {
             //Start the countdown from the user input duration.
             Console.WriteLine("-------- Inhale --------");
-            ShowCountDown();
+            ShowCountDown(getTime);
             //Exhale
             Console.WriteLine("-------- Exhale --------");
-            ShowCountDown();
+            ShowCountDown(getTime);
         }
         DisplayEndingMessage();
+    }
+
+
+    /// <summary>
+    /// User specified breathing durations between 4 secodns and 8 seconds.
+    /// </summary>
+    /// <returns>_breathingDuration as a int for seconds.</returns>
+    private int BreathingTimes()
+    {
+        Console.WriteLine("Please choose a breathing interval.");
+        Console.WriteLine("1) Short is 4 seconds | 2) normal is 6 seconds | 3) long intervals is 8 seconds for breathing?");
+        Console.Write("<> ");
+        int userInput = int.Parse(Console.ReadLine());
+        if (userInput == 1)
+        {
+            _breathingDuration = 4;
+        }
+        else if (userInput == 2)
+        {
+            _breathingDuration = 6;
+        }
+        else if (userInput == 3)
+        {
+            _breathingDuration = 8;
+        }
+        else
+        {
+            _breathingDuration = 6;
+        }
+        return _breathingDuration;
     }
 }
