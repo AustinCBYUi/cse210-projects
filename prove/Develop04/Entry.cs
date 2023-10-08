@@ -1,11 +1,19 @@
+/// <summary>
+/// Created by two types of entry instances. A main entry which is designed to keep track of the Entries list,
+/// and the Writing to file. Creating individual entries through the loops is the proper way to create the single
+/// entries. The main entry must add to the Entry list via AddToEntry method with the individual entry as a parameter.
+/// </summary>
 public class Entry : Activity
 {
-    internal List<Entry> _entry = new List<Entry>();
-    internal string _prompt;
-    internal string _question;
-    internal string _userText;
+    private List<Entry> _entry = new List<Entry>();
+    private string _prompt;
+    private string _question;
+    private string _userText;
 
 
+    /// <summary>
+    /// Single constructor for initializing mainEntries instead of individual entries.
+    /// </summary>
     public Entry() {}
 
 
@@ -35,6 +43,19 @@ public class Entry : Activity
         _prompt = prompt;
         _userText = userText;
     }
+
+
+    /// <summary>
+    /// Adds the parameter entry into the _entry list. To use this properly, you must have a main Entry
+    /// and then individual entries. The main entry should only have control over the list and writing
+    /// files.
+    /// </summary>
+    /// <param name="entry">Individual entry must be used as a parameter.</param>
+    public void AddToEntryList(Entry entry)
+    {
+        _entry.Add(entry);
+    }
+
 
     /// <summary>
     /// Writes a file in the form of a text file with specific fields: prompt, question, entry.
