@@ -57,7 +57,7 @@ public class ListingActivity : Activity
             //Create a new entry with parameters
             Entry newEntry = new Entry(prompt, userInput);
             //Add it to our mainEntry list.
-            mainEntry._entry.Add(newEntry);
+            mainEntry.AddToEntryList(newEntry);
             //Add to count.
             _count += 1;
         }
@@ -75,7 +75,7 @@ public class ListingActivity : Activity
     /// Choose a random prompt by index and the Random class.
     /// </summary>
     /// <returns>The chosen prompt as a string.</returns>
-    public string GetRandomPrompt()
+    private string GetRandomPrompt()
     {
         Random newPrompt = new Random();
         int index = newPrompt.Next(_prompts.Count);

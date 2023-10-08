@@ -65,7 +65,7 @@ public class ReflectingActivity : Activity
             //Record the entry.
             _recordEachEntry += 1;
             //Add to the mainEntry list.
-            mainEntry._entry.Add(newEntry);
+            mainEntry.AddToEntryList(newEntry);
         }
         //Optional ability to save your entries to a file.
         Console.Write("Save to file? (Y/N): ");

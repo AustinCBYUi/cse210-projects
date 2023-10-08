@@ -46,7 +46,7 @@ Please type the number for the activity you choose!
                     startLisActivity.Run();
                     break;
                 case 4:
-                    System.Console.Beep();
+                    // System.Console.Beep(); //This was fun!
                     Environment.Exit(0);
                     break;
             }
