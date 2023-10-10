@@ -11,21 +11,13 @@ public abstract class Shape
         _color = color;
     }
 
-    public virtual void SetColor(string color)
-    {
-        _color = color;
-    }
-
 
     public virtual string GetColor()
     {
-        return $"Color: {_color}";
+        return _color;
     }
 
 
-    public virtual double GetArea()
-    {
-        return 100f;
-    }
+    public abstract double GetArea();
 }
 
