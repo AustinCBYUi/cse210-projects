@@ -22,13 +22,18 @@ public abstract class Goal
 
     public virtual string GetDetailsString()
     {
-        return "";
+        return _points;
+    }
+
+    public virtual string GetTitle()
+    {
+        return _shortName;
     }
 
 
     public virtual string GetStringRepresentation()
     {
-        string goalAsString = $"[ ] {_shortName} ({_description})";
+        string goalAsString = $"{_shortName} ({_description})";
         return goalAsString;
     }
 }

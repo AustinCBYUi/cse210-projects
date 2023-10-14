@@ -5,6 +5,8 @@ public class EternalGoal : Goal
 
     }
 
+    
+
 
     public override void RecordEvent()
     {
@@ -15,6 +17,13 @@ public class EternalGoal : Goal
     public override bool IsComplete()
     {
         return false;
+    }
+
+
+    public override string GetDetailsString()
+    {
+        string eternalString = $"{_shortName}|{_description}|{_points}";
+        return eternalString;
     }
 
 

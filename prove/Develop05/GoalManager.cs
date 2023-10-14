@@ -1,4 +1,6 @@
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 
 public class GoalManager
 {
@@ -103,22 +105,44 @@ public class GoalManager
 
     }
 
-
+    /// <summary>
+    /// Lists the goals from the _goals list, uses a conditional to see if the goal is completed or not.
+    /// If the goal is completed, an X Will be placed in the box, otherwise it will be left empty.
+    /// </summary>
     public void ListGoalNames()
     {
         Console.WriteLine("The goals are: ");
         int counter = 0;
         foreach (Goal goal in _goals)
         {
-            counter += 1;
-            Console.WriteLine($"{counter}. {goal.GetStringRepresentation()}");
+            if (goal.IsComplete() == true)
+            {
+                counter += 1;
+                Console.WriteLine($"{counter}. [X] {goal.GetStringRepresentation()}");
+            }
+            else if (goal.IsComplete() == false)
+            {
+                counter += 1;
+                Console.WriteLine($"{counter}. [ ] {goal.GetStringRepresentation()}");
+            }
         }
     }
 
 
-    public void ListGoalDetails()
-    {
 
+    public int ListGoalDetails(GoalManager manager)
+    {
+        int selection = 0;
+        int counter = 0;
+        foreach (Goal goal in _goals)
+        {
+            counter += 1;
+            Console.WriteLine($"{counter}. {goal.GetTitle()}");
+        }
+        Console.Write("Choose a goal you completed!: ");
+        selection = int.Parse(Console.ReadLine());
+
+        return selection;
     }
 
 
@@ -128,22 +152,98 @@ public class GoalManager
     }
 
 
-    public void RecordEvent(Goal newGoal)
+    public void RecordEvent(GoalManager manager)
     {
-        _goals.Add(newGoal);
+        //Get the user selection.
+        int option = ListGoalDetails(manager);
+        Goal newGoalOption = manager._goals[option - 1];
+        Console.WriteLine(newGoalOption);
+        //TODO: Need to add the points, and this should call the specific goal's RecordEvent
+        //which will add the points to your user profile through here, check off the list by using the isComplete(),
+        //then once everything is updated, you should save your goals, or perhaps it should auto-save?
+        
 
-        Console.WriteLine(_goals);
     }
 
 
+    /// <summary>
+    /// Saves all goals in the GoalManager list to a text file specifically formatted for unwrapping.
+    /// </summary>
     public void SaveGoals()
     {
+        Console.Write("What would you like to name the file (exclude extension)?: ");
+        string fileName = Console.ReadLine();
+        fileName = $"{fileName}.txt";
 
+        using (StreamWriter output = new StreamWriter(fileName))
+        {
+            output.WriteLine(_score); //Might need to be changed?
+            foreach (Goal goal in _goals)
+            {
+                if (goal is not ChecklistGoal)
+                {
+                    string getString = goal.GetDetailsString();
+                    output.WriteLine($"{goal}|{getString}");
+                }
+                else if (goal is ChecklistGoal)
+                {
+                    string getDetailsFromChecklist = goal.GetDetailsString();
+                    output.WriteLine($"{goal}|{getDetailsFromChecklist}");
+                }
+            }
+        }
     }
 
 
-    public void LoadGoals()
-    {
 
+    public void LoadGoals(GoalManager manager)
+    {
+        Console.Write("What is the file you'd like to load?: ");
+        string loadFile = Console.ReadLine();
+        loadFile = $"{loadFile}.txt";
+        string[] lines = System.IO.File.ReadAllLines(loadFile);
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split("|");
+            string goalType = parts[0];
+            if (goalType == "SimpleGoal")
+            {
+                string name = parts[1];
+                string description = parts[2];
+                string points = parts[3];
+                string completed = parts[4];
+                bool isComplete = false;
+                if (completed == "true")
+                {
+                    isComplete = true;
+                }
+                else
+                {
+                    isComplete = false;
+                }
+                SimpleGoal newSimpleGoal = new SimpleGoal(name, description, points, isComplete);
+                manager.CreateGoal(newSimpleGoal);
+            }
+            else if (goalType == "EternalGoal")
+            {
+                string name = parts[1];
+                string description = parts[2];
+                string points = parts[3];
+                EternalGoal newEternalGoal = new EternalGoal(name, description, points);
+                manager.CreateGoal(newEternalGoal);
+            }
+            if (goalType == "ChecklistGoal")
+            {
+                string name = parts[1];
+                string description = parts[2];
+                string points = parts[3];
+                int bonus = int.Parse(parts[4]);
+                int target = int.Parse(parts[5]);
+                int completed = int.Parse(parts[6]);
+                ChecklistGoal newChecklistGoal = new ChecklistGoal(name, description, points, target, bonus, completed);
+                manager.CreateGoal(newChecklistGoal);
+            }
+        }
     }
 }

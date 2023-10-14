@@ -24,6 +24,18 @@ class Program
                 case "2":
                     mainGoalManager.ListGoalNames();
                     break;
+                case "3":
+                    mainGoalManager.SaveGoals();
+                    break;
+                case "4":
+                    mainGoalManager.LoadGoals(mainGoalManager);
+                    break;
+                case "5":
+                    mainGoalManager.RecordEvent(mainGoalManager);
+                    break;
+                case "6":
+                    Environment.Exit(0);
+                    break;
             }
         }
 
