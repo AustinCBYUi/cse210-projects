@@ -1,4 +1,0 @@
-0
-SimpleGoal|Testing simple goal|Testing my simple goals|50|False
-EternalGoal|eternal goal|this is my eternal goals|500
-ChecklistGoal|checklist goal|this is my checklist goals|1000|1500|3|0

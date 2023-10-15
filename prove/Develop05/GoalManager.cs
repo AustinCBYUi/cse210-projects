@@ -1,7 +1,12 @@
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
+/// <summary>
+/// GoalManager references a manager that handles writing all goals, saving, loading, recording and a list of all created
+/// goals.
+/// </summary>
 public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
@@ -16,15 +21,25 @@ public class GoalManager
     6. Quit
     ";
 
+    /// <summary>
+    /// GoalManager constructor that handles writing all goals, saving, loading, recording, and Goals List.
+    /// </summary>
     public GoalManager() {}
 
 
+    /// <summary>
+    /// Writes the formatted menu.
+    /// </summary>
     public void GetMenu()
     {
         Console.WriteLine(_menu);
     }
 
 
+    /// <summary>
+    /// Creates a new menu and switch/case statements for user to choose what type of goal they'd like to create.
+    /// </summary>
+    /// <returns>a new Goal type named newGoal, whatever goal you wrote.</returns>
     public Goal Start()
     {
         Goal newGoal = null;
@@ -39,6 +54,8 @@ public class GoalManager
         {
             //Create simple goal
             case "1":
+                //For the others too: MainGoalQuestions has conditional statements to control the flow
+                //of what questions are asked, I'm just using the string to specify this.
                 newGoal = MainGoalQuestions("simple");
                 break;
             //Create eternal goal
@@ -50,6 +67,7 @@ public class GoalManager
                 newGoal = MainGoalQuestions("checklist");
                 break;
         }
+        //Returns the newGoal!
         return newGoal;
     }
 
@@ -67,7 +85,9 @@ public class GoalManager
             * This is unfortunantely inevitable in this scenario, though I look wise writing a function for this,
             * it is mainly through actually writing it 4 times that I decided to make a function to handle this
             * algorithm! The nice thing is the three programs share the questions, and only checklist introduces
-            * new ones! I'm proud to use this system however.
+            * new ones! I'm proud to use this system however. Basically it checks the goalType by which type it
+            * is, if it matches a condition it will either create that specific goal type through the constructor,
+            * or it will ask a few more questions, THEN create the goal!
             */
             Goal newGoal = null;
 
@@ -100,10 +120,14 @@ public class GoalManager
         }
 
 
+    /// <summary>
+    /// Displays players score.
+    /// </summary>
     public void DisplayPlayerInfo()
     {
-
+        Console.WriteLine($"You have {_score} points!");
     }
+
 
     /// <summary>
     /// Lists the goals from the _goals list, uses a conditional to see if the goal is completed or not.
@@ -129,7 +153,11 @@ public class GoalManager
     }
 
 
-
+    /// <summary>
+    /// Lists the goals to choose a selection to record a goal. Intended to be used for RecordEvent.
+    /// </summary>
+    /// <param name="manager">Must use the GoalManager type when called to transfer the instance.</param>
+    /// <returns>An integer for the selection which is plugged in to the index minus 1.</returns>
     public int ListGoalDetails(GoalManager manager)
     {
         int selection = 0;
@@ -146,23 +174,32 @@ public class GoalManager
     }
 
 
+    /// <summary>
+    /// Creates a goal by adding the Goal newGoal to the _goals list.
+    /// </summary>
+    /// <param name="newGoal">Whichever goal that needs to be added to the list.</param>
     public void CreateGoal(Goal newGoal)
     {
         _goals.Add(newGoal);
     }
 
 
+    /// <summary>
+    /// Records a finished goal by listing all goals with selection and short names, then taking the user selection
+    /// and plugging it into the _goals list as an index, which subtracts 1 to match the index. Finally, uses the 
+    /// specific inherited goals RecordEvent() method to either mark it as finished or add to _amountCompleted, and
+    /// adds the points to _score.
+    /// </summary>
+    /// <param name="manager">Must use GoalManager type as a parameter.</param>
     public void RecordEvent(GoalManager manager)
     {
         //Get the user selection.
         int option = ListGoalDetails(manager);
         Goal newGoalOption = manager._goals[option - 1];
-        Console.WriteLine(newGoalOption);
-        //TODO: Need to add the points, and this should call the specific goal's RecordEvent
-        //which will add the points to your user profile through here, check off the list by using the isComplete(),
-        //then once everything is updated, you should save your goals, or perhaps it should auto-save?
-        
-
+        newGoalOption.RecordEvent();
+        string getPoints = newGoalOption.GetPoints();
+        Console.WriteLine($"Congratulations! You earned {getPoints} points!");
+        _score += int.Parse(getPoints); //Adds points
     }
 
 
@@ -174,45 +211,67 @@ public class GoalManager
         Console.Write("What would you like to name the file (exclude extension)?: ");
         string fileName = Console.ReadLine();
         fileName = $"{fileName}.txt";
-
-        using (StreamWriter output = new StreamWriter(fileName))
+        try
         {
-            output.WriteLine(_score); //Might need to be changed?
-            foreach (Goal goal in _goals)
+            using (StreamWriter output = new StreamWriter(fileName))
             {
-                if (goal is not ChecklistGoal)
+                output.WriteLine($"{_score}"); //Might need to be changed?
+                foreach (Goal goal in _goals)
                 {
-                    string getString = goal.GetDetailsString();
-                    output.WriteLine($"{goal}|{getString}");
-                }
-                else if (goal is ChecklistGoal)
-                {
-                    string getDetailsFromChecklist = goal.GetDetailsString();
-                    output.WriteLine($"{goal}|{getDetailsFromChecklist}");
+                    if (goal is not ChecklistGoal)
+                    {
+                        string getString = goal.GetDetailsString();
+                        output.WriteLine($"{goal}|{getString}");
+                    }
+                    else if (goal is ChecklistGoal)
+                    {
+                        string getDetailsFromChecklist = goal.GetDetailsString();
+                        output.WriteLine($"{goal}|{getDetailsFromChecklist}");
+                    }
                 }
             }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Successfully wrote to {fileName}!");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+        }
+        catch (Exception e)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("File unsuccessfully saved!");
+            Console.WriteLine(e.Message);
+            Console.ForegroundColor = ConsoleColor.Cyan;
         }
     }
 
 
-
+    /// <summary>
+    /// Loads user goals from a saved text file with the user input to locate the file name.
+    /// </summary>
+    /// <param name="manager">GoalManager type</param>
     public void LoadGoals(GoalManager manager)
     {
-        Console.Write("What is the file you'd like to load?: ");
+        Console.Write("What is the file you'd like to load(Exclude file extension)?: ");
         string loadFile = Console.ReadLine();
         loadFile = $"{loadFile}.txt";
-        string[] lines = System.IO.File.ReadAllLines(loadFile);
-
+        string[] lines = File.ReadAllLines(loadFile);
+        //Gets score as ReadLines at First line.
+        string getScore = File.ReadLines(loadFile).First();
+        //Score is then set to the score you had.
+        _score = int.Parse(getScore);
+        
+        //Loop through all lines.
         foreach (string line in lines)
         {
             string[] parts = line.Split("|");
             string goalType = parts[0];
+            //If it's a SimpleGoal, it'll be written slightly different.
             if (goalType == "SimpleGoal")
             {
                 string name = parts[1];
                 string description = parts[2];
                 string points = parts[3];
                 string completed = parts[4];
+                //Boolean is for re-adding finished goals.
                 bool isComplete = false;
                 if (completed == "true")
                 {
@@ -225,6 +284,7 @@ public class GoalManager
                 SimpleGoal newSimpleGoal = new SimpleGoal(name, description, points, isComplete);
                 manager.CreateGoal(newSimpleGoal);
             }
+            //EternalGoals don't have booleans.
             else if (goalType == "EternalGoal")
             {
                 string name = parts[1];
@@ -233,6 +293,7 @@ public class GoalManager
                 EternalGoal newEternalGoal = new EternalGoal(name, description, points);
                 manager.CreateGoal(newEternalGoal);
             }
+            //Checklist goals are written extremely different.
             if (goalType == "ChecklistGoal")
             {
                 string name = parts[1];
