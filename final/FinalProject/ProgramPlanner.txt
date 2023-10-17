@@ -1,0 +1,16 @@
+Title: ProtoDB CLI
+Purpose: Personal use primarily, financial tools like bill pay reminder and paylogger which logs my paychecks.
+		Additionally will contain a easy way to create programs plans like this by having a easy to follow layout
+		that allows you to make classes and data fields which are written to a file like this one! Lastly, the
+		option to take notes that are split every time you press a certain key, which auto-saves it to a notepad file.
+		
+Main program :
+
+--------------
+
+- Menu
+	Attributes/Fields:
+		_title : String
+		_menuOptions : String
+		
+	Const
