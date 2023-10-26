@@ -1,1 +1,0 @@
-Generated entries should be sent to the output_files destination.
