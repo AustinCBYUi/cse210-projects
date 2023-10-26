@@ -1,0 +1,2 @@
+Book | Chapter | Verse | optional End Verse keep at 0 | Text (Must only be one line after this one, cannot have multiples!)
+Proverbs | 3 | 5 | 6 | Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.
